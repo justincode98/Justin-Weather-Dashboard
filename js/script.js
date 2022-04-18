@@ -121,21 +121,26 @@ function getCityINFO(cityName) {//REMEMBER TO REPLACE API JEY
         });
 }
 
-/*
+
 function sidePanel() {//create the side panel using the card class in bootstrap
-    let sideSelectE1 = document.querySelector("#side-panel");
-    let buttonList = document.createElement("div");
-    buttonList.className = "btn-group-vertical";
+    let buttonListE1 = document.querySelector("#btn-list");
+    buttonListE1.innerHTML = "";
     //now iterate through local storage and create buttons for each
     for(let i = 0; i < localStorage.length; i++) {
         let keyText = localStorage.key(i);
-        console.log(keyText);
+        console.log("keys! " + keyText);
+        let tempButton = document.createElement("button");
+        tempButton.setAttribute(keyText, keyText);
+        tempButton.className = "btn btn-secondary";
+        tempButton.textContent = keyText;
+        buttonListE1.appendChild(tempButton);
     }
+    
 
 
 
 }
-*/
+
 //intializes top half of info panel, basically the current weather display
 
 
@@ -143,7 +148,7 @@ function sidePanel() {//create the side panel using the card class in bootstrap
 
 
 
-//sidePanel();
+sidePanel();
 //search form listener
 let searchFormRetrieval = document.querySelector("#side-panel");
 
@@ -152,7 +157,8 @@ searchFormRetrieval.addEventListener("submit", function(event) {
     event.preventDefault();
     currentCityName = event.target[0].value;
     getCityINFO(currentCityName);
-    //localStorage.setItem(currentCityName, currentCityName);
+    localStorage.setItem(currentCityName, currentCityName);
+    sidePanel();
 });
 
 //history button listeners

@@ -18,7 +18,7 @@ Moderate:  Yellow
 Favorable: Green  
 
 ## Known Issues
-UV coloring
-Dates
-Local Storage
-Refactoring
+UV coloring  
+Dates  
+Local Storage  
+Refactoring  
