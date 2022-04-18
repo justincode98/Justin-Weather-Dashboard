@@ -1,30 +1,20 @@
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  line-height: 1;
+.card{
+  border-color: black;
+  color: #000000;
+  padding: 10px;
 }
 
-textarea{
-  background: transparent;
-  border: none;
-  resize: none;
-  color: #000000;
-  border-left: 1px solid black;
-  padding: 10px;
+.mini-card{
+  background-color: darkblue;
+  color: white;
 }
 
 /*jumbotron used in starter code*/
 .jumbotron {
+  background-image: linear-gradient(to right, blue, black);
   text-align: center;
-  background-color: transparent;
-  color: black;
+  color: white;
+  flex-shrink: 0;
   border-radius: 0;
-  border-bottom: 10px solid black;
 }
 
-
-.row {
-  white-space: pre-wrap;
-  height: 80px;
-  border-top: 1px solid white;;
-}

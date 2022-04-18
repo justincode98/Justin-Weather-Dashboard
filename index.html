@@ -31,29 +31,13 @@
 
   <body class>
     <header class="jumbotron">
-      <h1 class="display-3">Weather Dashboard</h1>
+      <h1>Weather Dashboard</h1>
     </header>
-    <!--Create a container with 2 columns; 
-      side panel contains search and past history; 
-      info panel contains the rest of the information ie 5 day forcast of the selected city;
-      the info panel is wiped after every new selection much like in project 3-->
+    
     <div class="container">
       <div class="row"> 
-        <div class="col-5 " id="side-panel">
-           <!--BREAKDOWN
-            HEADER-"Search for a City:"
-            Search Bar
-            Blue "Search" Button
-            (LINE SEPARATING)
-            8 grey buttons of previously searched cities
+        <div class="col-2 " id="side-panel">
           
-          <div class="card-body" id="side-panel-body">
-            <h2 class="card-title text-left">Search for a City:</h2>
-            <form class="card-text">
-              <input type="text" id="citySearch" name="fname" placeholder="Enter a city"><br>
-              <button class="btn btn-primary" type="submit" ></button>
-            </form>
-          </div>-->
           <form>
             <div class="form-group" id="cityForm">
               <label for="cityInput">Search for a City:</label>
@@ -68,25 +52,7 @@
 
         </div>
         <div class="col" id="info-panel">
-          <!--BREAKDOWN
-            the top half should have a card with the folowing format:
-            HEADER-[City]"(Date)"[Icon]
-            "Temp: "[Degrees Fahrenheit]
-            "Wind: "[Speed MPH]
-            "Humdity: "[Percentage]
-            "UV Index: "[Number colorcoded background]
-
-            the bottom half should be mostly 5 cards with the same properties as the top half, withe the the icons under the header instead of aside
-            no UV index
-
-            HEADER- 5-Day Forecast: (this should actually be a row seperate from the cards)
-            Cards
-
-            prehaps it would be better to have 3 rows then
-            either way create a function for each "row"
-
-
-          -->
+          
 
         </div>
       </div>

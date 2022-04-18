@@ -36,14 +36,29 @@ function infoPanel(cityName, currentWeather) { //need to add date (dt, utc) and 
             <h2 class="card-title">${cityName}</h2>
             <p class="card-text">Temp: ${currentWeather.current.temp} Fahrenheit</p>
             <p class="card-text">Wind: ${currentWeather.current.wind_speed} MPH</p>
-            <p class="card-text">Humidity: ${currentWeather.current.humidity} Fahrenheit</p>
-            <p class="card-text">UV Index: ${currentWeather.current.uvi}</p>
+            <p class="card-text">Humidity: ${currentWeather.current.humidity}%</p>
+            <p class="card-text" id="uvIndex">UV Index: ${currentWeather.current.uvi}</p>
         </div>
-    </div>`;
-    let temp = currentWeather.current.temp;
+    </div>`;//add span to uvi?
+    let indexElement = document.querySelector("#uvIndex");
+    let uvNum = currentWeather.current.uvi;
+    
+    let indexColor;
+    if(uvNum > 8) {
+        indexColor = " bg-danger";
+    }
+    else if(uvNum > 3) {
+        indexColor = " bg-warning";
+    }
+    else {
+        console.log("safe");
+        indexColor = " bg-success";
+    }
+    indexElement.className += indexColor;
+    /*let temp = currentWeather.current.temp;
     let wind = currentWeather.current.wind_speed;
     let humidity = currentWeather.current.humidity;
-    let uvi = currentWeather.current.uvi;
+    let uvi = currentWeather.current.uvi;*/
     //let x = document.querySelector("#info-panel");
     //let weatherArray = [currentWeather.current.temp, currentWeather.current.wind_speed, currentWeather.current.humidity, currentWeather.current.uvi];
 
@@ -68,13 +83,13 @@ function infoPanel(cityName, currentWeather) { //need to add date (dt, utc) and 
 //create an card element, before editing it's html before appending it to the actual parent row
     for(let i = 0; i < 5; i++) {
         var tempCard = document.createElement("div");
-        tempCard.className = "card";
+        tempCard.className = "card col-sm mini-card";
         tempCard.innerHTML = 
         `<div class="card-body">
-            <h3 class="card-title">DATE</h3>
-            <p class="card-text">Temp: ${currentWeather.daily[i].temp.max} Fahrenheit</p> 
+            <h5 class="card-title">DATE</h5>
+            <p class="card-text">Temp: ${currentWeather.daily[i].temp.max} &#176;F</p> 
             <p class="card-text">Wind: ${currentWeather.daily[i].wind_speed} MPH</p>
-            <p class="card-text">Humidity: ${currentWeather.daily[i].humidity} Fahrenheit</p>
+            <p class="card-text">Humidity: ${currentWeather.daily[i].humidity}%</p>
         </div>`;
         parentCard.appendChild(tempCard);
     }
