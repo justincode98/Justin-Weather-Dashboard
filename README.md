@@ -18,5 +18,7 @@ Moderate:  Yellow
 Favorable: Green  
 
 ## Known Issues
-extremely ugly  
-no local storage
+UV coloring
+Dates
+Local Storage
+Refactoring

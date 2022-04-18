@@ -1,16 +1,12 @@
 //GLOBAL VARIABLES----------------------------------------------------------------------------------------------------------------------
-//takes the time from moment as well as formatting it into Weekday, Month Day format
-//remember local storage should have 9 variables- 8 to store past searches, 1 to to store the current position; 
-//reset to 1 to overwrite when reaches 9
-
 //call geocoding to find lats and long to then use in one call
-//note: this calls multiple locations with the same name, just use the first one
+//note: this calls multiple locations with the same name, just limit to witht he limit query the first one
 
 //http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 //when clearing just set innerhtml to ""
 
-const key = config.API_TOKEN;
+const key_API = config.API_TOKEN;
 var currentCityName = "";
 
 
@@ -31,9 +27,9 @@ function addGenericCard(parent, temp, wind, humidity, uv) {
         </div>
     </div>`;
 }
-function topHalf(cityName, currentWeather) { //need to add date (dt, utc) and icon
+function infoPanel(cityName, currentWeather) { //need to add date (dt, utc) and icon
     let x = document.querySelector("#info-panel");
-    /*console.log("here " + currentWeather);
+    console.log("here " + currentWeather);
     x.innerHTML = 
     `<div class="card">
         <div class="card-body">
@@ -44,7 +40,6 @@ function topHalf(cityName, currentWeather) { //need to add date (dt, utc) and ic
             <p class="card-text">UV Index: ${currentWeather.current.uvi}</p>
         </div>
     </div>`;
-*/
     let temp = currentWeather.current.temp;
     let wind = currentWeather.current.wind_speed;
     let humidity = currentWeather.current.humidity;
@@ -52,7 +47,8 @@ function topHalf(cityName, currentWeather) { //need to add date (dt, utc) and ic
     //let x = document.querySelector("#info-panel");
     //let weatherArray = [currentWeather.current.temp, currentWeather.current.wind_speed, currentWeather.current.humidity, currentWeather.current.uvi];
 
-    addGenericCard("#info-panel", temp, wind, humidity, uvi);
+    //Would a create a function to handle card creation, but that's not working
+
     
 
     let dividerRow = document.createElement("div");
@@ -62,9 +58,26 @@ function topHalf(cityName, currentWeather) { //need to add date (dt, utc) and ic
 
     let cardRow = document.createElement("div");
     cardRow.className = "row";
-    cardRow.id = "cardRow";
+    cardRow.id = "card-row";
     x.appendChild(cardRow);
 
+    let parentCard = document.querySelector("#card-row");
+
+
+//create the 5 cards, note that temp actually is sectioned into different times of the day, so just take the max
+//create an card element, before editing it's html before appending it to the actual parent row
+    for(let i = 0; i < 5; i++) {
+        var tempCard = document.createElement("div");
+        tempCard.className = "card";
+        tempCard.innerHTML = 
+        `<div class="card-body">
+            <h3 class="card-title">DATE</h3>
+            <p class="card-text">Temp: ${currentWeather.daily[i].temp.max} Fahrenheit</p> 
+            <p class="card-text">Wind: ${currentWeather.daily[i].wind_speed} MPH</p>
+            <p class="card-text">Humidity: ${currentWeather.daily[i].humidity} Fahrenheit</p>
+        </div>`;
+        parentCard.appendChild(tempCard);
+    }
 
 }
 
@@ -73,7 +86,7 @@ function topHalf(cityName, currentWeather) { //need to add date (dt, utc) and ic
             "Humdity: "[Percentage]
             "UV Index: "[Number colorcoded background]*/
 function getCityWeather(lat, lon) { //exlude all except current and daily
-    var weatherCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly,alerts&appid=${key}`;
+    var weatherCall = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly,alerts&appid=${key_API}`;
     fetch(weatherCall)
         .then(function(response) {
             return response.json();
@@ -81,7 +94,7 @@ function getCityWeather(lat, lon) { //exlude all except current and daily
         .then(function(data) {
             console.log("success", data);
             
-            topHalf(currentCityName, data); //actually create here because api timing issues
+            infoPanel(currentCityName, data); //actually create here because api timing issues
             //return tempArray;
         })
         .catch(function(error) {
@@ -90,9 +103,9 @@ function getCityWeather(lat, lon) { //exlude all except current and daily
 }
 
 function getCityINFO(cityName) {//REMEMBER TO REPLACE API JEY
-    console.log("city caled ");
+    console.log("city called ");
     //call geo for coordinates first before calling the actual weather api
-    var geoCall = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${key}`;
+    var geoCall = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${key_API}`;
     fetch(geoCall)
         .then(function(response) {
             return response.json();
@@ -108,46 +121,43 @@ function getCityINFO(cityName) {//REMEMBER TO REPLACE API JEY
         });
 }
 
-
+/*
 function sidePanel() {//create the side panel using the card class in bootstrap
     let sideSelectE1 = document.querySelector("#side-panel");
-    //create variable to hold card to insert into html
-    //let insertedCard = '<div class="card-body">    <h5 class="card-title">Card title</h5>    <p class="card-text">Some quick example text to build on the card title and make up the bulk of thes content.</p>    <a href="#" class="btn btn-primary">Go somewhere</a>    </div>'
-    //sideSelectE1.innerHTML = insertedCard;
+    let buttonList = document.createElement("div");
+    buttonList.className = "btn-group-vertical";
+    //now iterate through local storage and create buttons for each
+    for(let i = 0; i < localStorage.length; i++) {
+        let keyText = localStorage.key(i);
+        console.log(keyText);
+    }
 
-   
 
-
-    
-
-    //remember to add buttons by retireiving from local storage and using for loop starting at pos[1]
-    //sideSelectE1.appendChild(tempBodyE1); //attach the card to html proper
 
 }
-
+*/
 //intializes top half of info panel, basically the current weather display
 
 
 
 
-function infoPanel() {
 
 
-}
-
-
-sidePanel();
+//sidePanel();
 //search form listener
 let searchFormRetrieval = document.querySelector("#side-panel");
 
 searchFormRetrieval.addEventListener("submit", function(event) {
+    console.log("triggered");
     event.preventDefault();
     currentCityName = event.target[0].value;
-
-//get array of lat,lon
-    var temp = getCityINFO(currentCityName);
-    console.log(temp);
-    //topHalf(retrievedName, temp);
-    //console.log("at thies point" + retrievedName);
+    getCityINFO(currentCityName);
+    //localStorage.setItem(currentCityName, currentCityName);
 });
 
+//history button listeners
+/*searchFormRetrieval.addEventListener("click", function(event) {
+    event.preventDefault();
+    
+    localStorage.setItem(currentCityName, currentCityName)
+});*/
