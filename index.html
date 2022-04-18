@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head class="bg-dark">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Added to include material icons from google, bootstrap icons as well-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+
+    <title>Weather Tracker</title>
+  </head>
+
+  <body class="bg-dark">
+    <header class="jumbotron">
+      <h1 class="display-3">Weather Dashboard</h1>
+    </header>
+    <!--Create a container with 2 columns; 
+      side panel contains search and past history; 
+      info panel contains the rest of the information ie 5 day forcast of the selected city;
+      the info panel is wiped after every new selection much like in project 3-->
+    <div class="container">
+      <div class="row"> 
+        <div class="col-5 " id="side-panel">
+           <!--BREAKDOWN
+            HEADER-"Search for a City:"
+            Search Bar
+            Blue "Search" Button
+            (LINE SEPARATING)
+            8 grey buttons of previously searched cities
+          
+          <div class="card-body" id="side-panel-body">
+            <h2 class="card-title text-left">Search for a City:</h2>
+            <form class="card-text">
+              <input type="text" id="citySearch" name="fname" placeholder="Enter a city"><br>
+              <button class="btn btn-primary" type="submit" ></button>
+            </form>
+          </div>-->
+          <form>
+            <div class="form-group" id="cityForm">
+              <label for="cityInput">Search for a City:</label>
+              <input type="city" class="form-control" id="cityInput" placeholder="Enter City">
+            </div>
+            <button type="submit" class="btn btn-primary">Search!</button>
+          </form>
+          <!--Insert past buttons here-->
+
+        </div>
+        <div class="col" id="info-panel">
+          <!--BREAKDOWN
+            the top half should have a card with the folowing format:
+            HEADER-[City]"(Date)"[Icon]
+            "Temp: "[Degrees Fahrenheit]
+            "Wind: "[Speed MPH]
+            "Humdity: "[Percentage]
+            "UV Index: "[Number colorcoded background]
+
+            the bottom half should be mostly 5 cards with the same properties as the top half, withe the the icons under the header instead of aside
+            no UV index
+
+            HEADER- 5-Day Forecast: (this should actually be a row seperate from the cards)
+            Cards
+
+            prehaps it would be better to have 3 rows then
+            either way create a function for each "row"
+
+
+          -->
+
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/key.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="./js/script.js"></script>
+    
+  </body>
+</html>
