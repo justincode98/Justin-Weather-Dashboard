@@ -29,7 +29,7 @@ function addGenericCard(parent, temp, wind, humidity, uv) {
 }
 function infoPanel(cityName, currentWeather) { //need to add date (dt, utc) and icon
     let x = document.querySelector("#info-panel");
-    console.log("here " + currentWeather);
+    
     x.innerHTML = 
     `<div class="card">
         <div class="card-body">
@@ -103,7 +103,7 @@ function getCityWeather(lat, lon) { //exlude all except current and daily
 }
 
 function getCityINFO(cityName) {//REMEMBER TO REPLACE API JEY
-    console.log("city called ");
+    
     //call geo for coordinates first before calling the actual weather api
     var geoCall = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${key_API}`;
     fetch(geoCall)
@@ -111,7 +111,7 @@ function getCityINFO(cityName) {//REMEMBER TO REPLACE API JEY
             return response.json();
         })
         .then(function(data) {
-            console.log(data, "retrieved");
+            
             getCityWeather(data[0].lat, data[0].lon); //start infopanel creation here
             
             //topHalf(cityName, temp);
@@ -130,7 +130,7 @@ function sidePanel() {//create the side panel using the card class in bootstrap
         let keyText = localStorage.key(i);
         console.log("keys! " + keyText);
         let tempButton = document.createElement("button");
-        tempButton.setAttribute(keyText, keyText);
+        tempButton.id = keyText;
         tempButton.className = "btn btn-secondary";
         tempButton.textContent = keyText;
         buttonListE1.appendChild(tempButton);
@@ -151,19 +151,26 @@ function sidePanel() {//create the side panel using the card class in bootstrap
 sidePanel();
 //search form listener
 let searchFormRetrieval = document.querySelector("#side-panel");
+let buttonGroupE1 = document.querySelector("#btn-list");
 
 searchFormRetrieval.addEventListener("submit", function(event) {
-    console.log("triggered");
+    
     event.preventDefault();
     currentCityName = event.target[0].value;
+    currentCityName = currentCityName.toLowerCase();
+    letterTemp = currentCityName.charAt(0).toUpperCase();
+    currentCityName = letterTemp + currentCityName.slice(1);
     getCityINFO(currentCityName);
     localStorage.setItem(currentCityName, currentCityName);
     sidePanel();
 });
 
 //history button listeners
-/*searchFormRetrieval.addEventListener("click", function(event) {
+buttonGroupE1.addEventListener("click", function(event) {
+    console.log("button pressed");
+    let buttonTempText = event.target.id;
     event.preventDefault();
     
-    localStorage.setItem(currentCityName, currentCityName)
-});*/
+    currentCityName = buttonTempText;
+    getCityINFO(buttonTempText);
+});
