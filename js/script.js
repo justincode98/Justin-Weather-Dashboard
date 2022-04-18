@@ -18,9 +18,22 @@ var currentCityName = "";
 
 
 //FUNCTIONS-------------------------------------------------------------------------------------------------------------------------------------
-function topHalf(cityName,currentWeather) { //need to add date (dt, utc) and icon
+function addGenericCard(parent, temp, wind, humidity, uv) {
+    let parentElement = document.querySelector(parent);
+    parentElement.innerHTML = 
+    `<div class="card">
+        <div class="card-body">
+            <h2 class="card-title">${cityName}</h2>
+            <p class="card-text">Temp: ${temp} Fahrenheit</p>
+            <p class="card-text">Wind: ${wind} MPH</p>
+            <p class="card-text">Humidity: ${humidity} Fahrenheit</p>
+            <p class="card-text">UV Index: ${uv}</p>
+        </div>
+    </div>`;
+}
+function topHalf(cityName, currentWeather) { //need to add date (dt, utc) and icon
     let x = document.querySelector("#info-panel");
-    console.log("here " + currentWeather);
+    /*console.log("here " + currentWeather);
     x.innerHTML = 
     `<div class="card">
         <div class="card-body">
@@ -31,6 +44,16 @@ function topHalf(cityName,currentWeather) { //need to add date (dt, utc) and ico
             <p class="card-text">UV Index: ${currentWeather.current.uvi}</p>
         </div>
     </div>`;
+*/
+    let temp = currentWeather.current.temp;
+    let wind = currentWeather.current.wind_speed;
+    let humidity = currentWeather.current.humidity;
+    let uvi = currentWeather.current.uvi;
+    //let x = document.querySelector("#info-panel");
+    //let weatherArray = [currentWeather.current.temp, currentWeather.current.wind_speed, currentWeather.current.humidity, currentWeather.current.uvi];
+
+    addGenericCard("#info-panel", temp, wind, humidity, uvi);
+    
 
     let dividerRow = document.createElement("div");
     dividerRow.id = "divider";
@@ -56,13 +79,13 @@ function getCityWeather(lat, lon) { //exlude all except current and daily
             return response.json();
         })
         .then(function(data) {
-            console.log(data, "wetahtercall");
+            console.log("success", data);
             
             topHalf(currentCityName, data); //actually create here because api timing issues
             //return tempArray;
         })
         .catch(function(error) {
-            alert("weather API call failed");
+            alert("weather1 API call failed");
         });
 }
 
@@ -75,7 +98,7 @@ function getCityINFO(cityName) {//REMEMBER TO REPLACE API JEY
             return response.json();
         })
         .then(function(data) {
-            //console.log(data, "retrieved");
+            console.log(data, "retrieved");
             getCityWeather(data[0].lat, data[0].lon); //start infopanel creation here
             
             //topHalf(cityName, temp);
@@ -119,7 +142,7 @@ let searchFormRetrieval = document.querySelector("#side-panel");
 
 searchFormRetrieval.addEventListener("submit", function(event) {
     event.preventDefault();
-     currentCityName = event.target[0].value;
+    currentCityName = event.target[0].value;
 
 //get array of lat,lon
     var temp = getCityINFO(currentCityName);

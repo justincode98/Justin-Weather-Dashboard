@@ -1,4 +1,4 @@
-# Justin Moment.js Legacy Code 
+# Justin Weather Dashboard
 This Project uses a combination of Javascript, Bootstrap, and the Open Weather One Call API to create a weather dashboard.  
 
 
@@ -6,7 +6,7 @@ This Project uses a combination of Javascript, Bootstrap, and the Open Weather O
 Download the code and run index.html with a web browser. 
 This code was tested in Google Chrome.  
 
-Alternatively it can be found live here: 
+Alternatively it can be found live here: https://justincode98.github.io/Justin-Weather-Dashboard/
 
 ## Usage
 After running index.html, the browser should show a simple calendar app that displays the current date at the top of the page.  
@@ -14,9 +14,9 @@ The user is then able to scroll down to view time blocks for standard business h
 The UV conditions are color coded.  
 
 Severe: Red  
-Moderate:  Yellow
+Moderate:  Yellow  
 Favorable: Green  
 
 ## Known Issues
-extremely ugly
+extremely ugly  
 no local storage
