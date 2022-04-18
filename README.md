@@ -1,5 +1,7 @@
 # Justin Weather Dashboard
-This Project uses a combination of Javascript, Bootstrap, and the Open Weather One Call API to create a weather dashboard.  
+This Project uses a combination of Javascript, Bootstrap, and the Open Weather One Call API to create a weather dashboard.    
+The end result should look like this:  
+![mockup](./mockup.PNG)  
 
 
 ## Installation
